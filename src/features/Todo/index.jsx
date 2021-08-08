@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TodoList from './components/TodoList';
 
-TodoFeature.propTypes = {
-
-};
+TodoFeature.propTypes = {};
 
 function TodoFeature(props) {
     const todoList = [
