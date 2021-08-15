@@ -3,29 +3,24 @@ import AlbumFeature from './features/Album/pages';
 import ColorBox from './components/ColorBox';
 import Counter from './components/Counter';
 import TodoFeature from './features/Todo/pages';
-import {Link, NavLink, Route} from "react-router-dom";
+import {NavLink, Route, Switch} from "react-router-dom";
 
 function App() {
     return (
         <div className="App">
             Header
-
-            {/*link*/}
-            <p><Link to="/todos">Todos</Link></p>
-            <p><Link to="/albums">Albums</Link></p>
-            <p><Link to="/color-box">Color Box</Link></p>
-            <p><Link to="/counter">Counter</Link></p>
-
             {/*nav link*/}
             <p><NavLink to="/todos" activeClassName='active-menu'>Todos</NavLink></p>
             <p><NavLink to="/albums">Albums</NavLink></p>
             <p><NavLink to="/color-box">Color Box</NavLink></p>
             <p><NavLink to="/counter">Counter</NavLink></p>
 
-            <Route path="/todos" component={TodoFeature}/>
-            <Route path="/albums" component={AlbumFeature}/>
-            <Route path="/color-box" component={ColorBox}/>
-            <Route path="/counter" component={Counter}/>
+            <Switch>
+                <Route path="/todos" component={TodoFeature}/>
+                <Route path="/albums" component={AlbumFeature}/>
+                <Route path="/color-box" component={ColorBox}/>
+                <Route path="/counter" component={Counter}/>
+            </Switch>
             Footer
         </div>
     );
