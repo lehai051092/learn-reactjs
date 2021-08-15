@@ -4,6 +4,7 @@ import ColorBox from './components/ColorBox';
 import Counter from './components/Counter';
 import TodoFeature from './features/Todo/pages';
 import {NavLink, Route, Switch} from "react-router-dom";
+import NotFound from "./components/NotFound";
 
 function App() {
     return (
@@ -20,6 +21,8 @@ function App() {
                 <Route path="/albums" component={AlbumFeature}/>
                 <Route path="/color-box" component={ColorBox}/>
                 <Route path="/counter" component={Counter}/>
+                {/*Not Found*/}
+                <Route component={NotFound}/>
             </Switch>
             Footer
         </div>
