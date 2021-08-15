@@ -40,6 +40,7 @@ function App() {
         <NavLink to="/counter">Counter</NavLink>
       </p>
       <Switch>
+        <Route path="/" exact/>
         <Route path="/todos" component={TodoFeature} />
         <Route path="/albums" component={AlbumFeature} />
         <Route path="/color-box" component={ColorBox} />
