@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,6 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CodeIcon from '@material-ui/icons/Code';
 import {Link, NavLink} from "react-router-dom";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +29,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className={classes.root}>
@@ -46,11 +59,27 @@ export default function ButtonAppBar() {
                     <NavLink className={classes.link} to={"/counter"}>
                         <Button color="inherit">Counter</Button>
                     </NavLink>
-                    <NavLink className={classes.link} to={"/register"}>
-                        <Button color="inherit">Register</Button>
-                    </NavLink>
+                    <Button color="inherit" onClick={handleClickOpen}>Register</Button>
                 </Toolbar>
             </AppBar>
+            <Dialog
+                disableBackdropClick disableEscapeKeyDown
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="form-dialog-title"
+            >
+                <DialogContent>
+                    <DialogContentText>
+                        To subscribe to this website, please enter your email address here. We will send updates
+                        occasionally.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Cancel
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
