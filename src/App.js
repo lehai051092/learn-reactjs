@@ -1,4 +1,3 @@
-import './App.css';
 import AlbumFeature from './features/Album/pages';
 import ColorBox from './components/ColorBox';
 import Counter from './components/Counter';
@@ -8,6 +7,7 @@ import NotFound from './components/NotFound';
 import {useEffect} from 'react';
 import productApi from './api/productApi';
 import CounterFeature from "./features/Counter";
+import Header from './components/Header';
 
 function App() {
     useEffect(() => {
@@ -24,22 +24,7 @@ function App() {
 
     return (
         <div className="App">
-            Header
-            {/*nav link*/}
-            <p>
-                <NavLink to="/todos" activeClassName="active-menu">
-                    Todos
-                </NavLink>
-            </p>
-            <p>
-                <NavLink to="/albums">Albums</NavLink>
-            </p>
-            <p>
-                <NavLink to="/color-box">Color Box</NavLink>
-            </p>
-            <p>
-                <NavLink to="/counter">Counter</NavLink>
-            </p>
+            <Header />
             <Switch>
                 <Redirect from="/home" to="/" exact/>
                 <Redirect from="/post-list/:postId" to="/posts/:postId" exact/>
