@@ -2,7 +2,7 @@ import AlbumFeature from './features/Album/pages';
 import ColorBox from './components/ColorBox';
 import Counter from './components/Counter';
 import TodoFeature from './features/Todo/pages';
-import {NavLink, Redirect, Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import NotFound from './components/NotFound';
 import {useEffect} from 'react';
 import productApi from './api/productApi';
