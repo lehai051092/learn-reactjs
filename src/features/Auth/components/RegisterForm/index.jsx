@@ -50,6 +50,10 @@ function RegisterForm(props) {
             .required('Please enter your password.')
             .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
                 , 'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'),
+        retypePassword: yup
+            .string()
+            .required('Please retype your password.')
+            .oneOf([yup.ref('password')], 'Password does not match.'),
     });
     const form = useForm({
         defaultValues: {
