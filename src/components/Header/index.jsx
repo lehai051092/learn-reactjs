@@ -63,7 +63,6 @@ export default function ButtonAppBar() {
                 </Toolbar>
             </AppBar>
             <Dialog
-                disableBackdropClick disableEscapeKeyDown
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
