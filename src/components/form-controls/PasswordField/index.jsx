@@ -8,6 +8,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import {FormHelperText} from "@material-ui/core";
 
 PasswordField.propTypes = {
     form: PropTypes.object.isRequired,
@@ -18,8 +19,8 @@ PasswordField.propTypes = {
 
 function PasswordField(props) {
     const {form, name, label, disabled} = props;
-    const {errors, formState} = form;
-    const hasError = errors[name] && formState.touched[name];
+    const {errors} = form;
+    const hasError = errors[name];
     const [showPassword, setShowPassword] = useState(false);
 
     const toggleShowPassword = () => {
@@ -49,8 +50,8 @@ function PasswordField(props) {
                 }
                 disabled={disabled}
                 error={hasError}
-                helperText={errors[name]?.message}
             />
+            <FormHelperText error={hasError}>{errors[name]?.message}</FormHelperText>
         </FormControl>
     );
 }

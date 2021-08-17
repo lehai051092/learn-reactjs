@@ -8,6 +8,7 @@ import {Avatar, Button, Typography} from "@material-ui/core";
 import {LockOutlined} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
 import PasswordField from "../../../../components/form-controls/PasswordField";
+import {matches} from "@testing-library/jest-dom/dist/utils";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,13 +40,16 @@ function RegisterForm(props) {
             .test(
                 'should has at least two words',
                 'Please enter at least two words.',
-                (value) => {return value.split(' ').length >= 2;}
-            ),
+                (value) => {return value.split(' ').length >= 2;}),
         email: yup
             .string()
             .required('Please enter your email.')
             .email('Please enter is valid email.'),
-
+        password: yup
+            .string()
+            .required('Please enter your password.')
+            .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+                , 'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'),
     });
     const form = useForm({
         defaultValues: {
