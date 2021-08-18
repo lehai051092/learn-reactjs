@@ -4,13 +4,14 @@ import InputField from '../../../../components/form-controls/InputField';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import {Avatar, Button, Typography} from "@material-ui/core";
+import {Avatar, Button, LinearProgress, Typography} from "@material-ui/core";
 import {LockOutlined} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
 import PasswordField from "../../../../components/form-controls/PasswordField";
 
 const useStyles = makeStyles(theme => ({
     root: {
+        position: 'relative',
         paddingTop: theme.spacing(4),
     },
     avatar: {
@@ -23,6 +24,12 @@ const useStyles = makeStyles(theme => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2, 0),
+    },
+    progress: {
+        position: 'absolute',
+        top: theme.spacing(1),
+        left: 0,
+        right: 0
     }
 }));
 
@@ -39,7 +46,9 @@ function RegisterForm(props) {
             .test(
                 'should has at least two words',
                 'Please enter at least two words.',
-                (value) => {return value.split(' ').length >= 2;}),
+                (value) => {
+                    return value.split(' ').length >= 2;
+                }),
         email: yup
             .string()
             .required('Please enter your email.')
@@ -64,16 +73,19 @@ function RegisterForm(props) {
         resolver: yupResolver(schema)
     });
 
-    const handleSubmit = (values) => {
+    const handleSubmit = async (values) => {
         const {onSubmit} = props;
         if (onSubmit) {
-            onSubmit(values);
+            await onSubmit(values);
         }
         form.reset();
     };
 
+    const {isSubmitting} = form.formState;
+
     return (
         <div className={classes.root}>
+            {isSubmitting && <LinearProgress className={classes.progress} color={"secondary"}/>}
             <Avatar className={classes.avatar}>
                 <LockOutlined/>
             </Avatar>
