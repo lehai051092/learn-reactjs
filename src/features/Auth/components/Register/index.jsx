@@ -30,7 +30,7 @@ function Register(props) {
             }
             enqueueSnackbar('Register successfully!!!', {variant: 'success'});
         } catch (error) {
-            enqueueSnackbar('Register failed.', {variant: 'error'});
+            enqueueSnackbar(error.message, {variant: 'error'});
         }
     }
 
