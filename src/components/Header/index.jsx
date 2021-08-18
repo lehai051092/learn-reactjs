@@ -10,6 +10,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Register from "../../features/Auth/components/Register";
+import {IconButton} from "@material-ui/core";
+import {Close} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +26,13 @@ const useStyles = makeStyles((theme) => ({
     link: {
         textDecoration: 'none',
         color: '#fff'
+    },
+    closeButton: {
+        position: 'absolute',
+        top: theme.spacing(1),
+        right: theme.spacing(1),
+        color: theme.palette.grey[500],
+        zIndex: 1
     }
 }));
 
@@ -63,18 +72,18 @@ export default function ButtonAppBar() {
                 </Toolbar>
             </AppBar>
             <Dialog
+                disableBackdropClick
+                disableEscapeKeyDown
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
             >
+                <IconButton className={classes.closeButton} onClick={handleClose}>
+                    <Close/>
+                </IconButton>
                 <DialogContent>
                     <Register closeDialog={handleClose}/>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
-                    </Button>
-                </DialogActions>
             </Dialog>
         </div>
     );
