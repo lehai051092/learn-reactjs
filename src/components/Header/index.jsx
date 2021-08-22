@@ -7,11 +7,10 @@ import Button from '@material-ui/core/Button';
 import CodeIcon from '@material-ui/icons/Code';
 import {Link, NavLink} from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import Register from "../../features/Auth/components/Register";
 import {IconButton} from "@material-ui/core";
 import {Close} from "@material-ui/icons";
+import Login from "../../features/Auth/components/Login";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -82,7 +81,8 @@ export default function ButtonAppBar() {
                     <Close/>
                 </IconButton>
                 <DialogContent>
-                    <Register closeDialog={handleClose}/>
+                    {/*<Register closeDialog={handleClose}/>*/}
+                    <Login closeDialog={handleClose}/>
                 </DialogContent>
             </Dialog>
         </div>
