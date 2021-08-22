@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Container, Grid, Paper, Typography} from "@material-ui/core";
+import {Box, Container, Grid, Paper} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import productApi from "../../../api/productApi";
 import ProductSkeletonList from "../components/ProductSkeletonList";
