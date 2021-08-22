@@ -8,7 +8,7 @@ import CodeIcon from '@material-ui/icons/Code';
 import {Link, NavLink} from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import {Box, IconButton} from "@material-ui/core";
+import {Box, IconButton, Menu, MenuItem} from "@material-ui/core";
 import {AccountCircle, Close} from "@material-ui/icons";
 import Login from "../../features/Auth/components/Login";
 import Register from "../../features/Auth/components/Register";
@@ -48,14 +48,23 @@ export default function ButtonAppBar() {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [mode, setMode] = useState(MODE.LOGIN);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleClose = (e) => {
+        (e.type === 'mouseup') ? setOpen(true) : setOpen(false);
     };
+
+    const handleUserClickOpen = (e) => {
+        setAnchorEl(e.currentTarget);
+    }
+
+    const handleUserClickClose = () => {
+        setAnchorEl(null);
+    }
 
     return (
         <div className={classes.root}>
@@ -78,7 +87,7 @@ export default function ButtonAppBar() {
                         <Button color="inherit">Counter</Button>
                     </NavLink>
                     {isLoggedIn && (
-                        <IconButton color="inherit">
+                        <IconButton color="inherit" onClick={handleUserClickOpen}>
                             <AccountCircle/>
                         </IconButton>
                     )}
@@ -89,8 +98,26 @@ export default function ButtonAppBar() {
                     )}
                 </Toolbar>
             </AppBar>
+            <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleUserClickClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                getContentAnchorEl={null}
+            >
+                <MenuItem onClick={handleUserClickClose}>Profile</MenuItem>
+                <MenuItem onClick={handleUserClickClose}>My account</MenuItem>
+                <MenuItem onClick={handleUserClickClose}>Logout</MenuItem>
+            </Menu>
             <Dialog
-                disableBackdropClick
                 disableEscapeKeyDown
                 open={open}
                 onClose={handleClose}
