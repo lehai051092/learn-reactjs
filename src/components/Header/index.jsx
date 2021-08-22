@@ -101,6 +101,9 @@ export default function ButtonAppBar() {
                     <NavLink className={classes.link} to={"/counter"}>
                         <Button color="inherit">Counter</Button>
                     </NavLink>
+                    <NavLink className={classes.link} to={"/products"}>
+                        <Button color="inherit">Products</Button>
+                    </NavLink>
                     {isLoggedIn && (
                         <IconButton color="inherit" onClick={handleUserClickOpen}>
                             <AccountCircle/>

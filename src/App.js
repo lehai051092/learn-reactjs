@@ -1,13 +1,14 @@
 import AlbumFeature from './features/Album/pages';
 import ColorBox from './components/ColorBox';
 import Counter from './components/Counter';
-import TodoFeature from './features/Todo/pages';
+import TodoFeature from './features/Todo';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import NotFound from './components/NotFound';
 import {useEffect} from 'react';
 import productApi from './api/productApi';
 import CounterFeature from "./features/Counter";
 import Header from './components/Header';
+import ProductFeature from "./features/Product";
 
 function App() {
     useEffect(() => {
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/albums" component={AlbumFeature}/>
                 <Route path="/color-box" component={ColorBox}/>
                 <Route path="/counter" component={Counter}/>
+                <Route path="/products" component={ProductFeature}/>
                 {/*Not Found*/}
                 <Route component={NotFound}/>
             </Switch>
