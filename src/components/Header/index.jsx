@@ -12,7 +12,8 @@ import {Box, IconButton, Menu, MenuItem} from "@material-ui/core";
 import {AccountCircle, Close} from "@material-ui/icons";
 import Login from "../../features/Auth/components/Login";
 import Register from "../../features/Auth/components/Register";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../../features/Auth/userSlice";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,6 +44,7 @@ const MODE = {
 };
 
 export default function ButtonAppBar() {
+    const dispatch = useDispatch();
     const loggedInUser = useSelector(state => state.user.current);
     const isLoggedIn = !!loggedInUser.id;
     const classes = useStyles();
@@ -55,7 +57,15 @@ export default function ButtonAppBar() {
     };
 
     const handleClose = (e) => {
-        (e.type === 'mouseup') ? setOpen(true) : setOpen(false);
+        if (e) {
+            if (e._reactName === 'onMouseUp') {
+                return setOpen(true);
+            } else {
+                return setOpen(false);
+            }
+        }
+
+        return setOpen(false);
     };
 
     const handleUserClickOpen = (e) => {
@@ -64,6 +74,11 @@ export default function ButtonAppBar() {
 
     const handleUserClickClose = () => {
         setAnchorEl(null);
+    }
+
+    const handleLogoutClick = () => {
+        dispatch(logout());
+        handleUserClickClose();
     }
 
     return (
@@ -115,7 +130,7 @@ export default function ButtonAppBar() {
             >
                 <MenuItem onClick={handleUserClickClose}>Profile</MenuItem>
                 <MenuItem onClick={handleUserClickClose}>My account</MenuItem>
-                <MenuItem onClick={handleUserClickClose}>Logout</MenuItem>
+                <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
             </Menu>
             <Dialog
                 disableEscapeKeyDown
