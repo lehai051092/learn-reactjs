@@ -9,9 +9,10 @@ import {Link, NavLink} from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import {Box, IconButton} from "@material-ui/core";
-import {Close} from "@material-ui/icons";
+import {AccountCircle, Close} from "@material-ui/icons";
 import Login from "../../features/Auth/components/Login";
 import Register from "../../features/Auth/components/Register";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,6 +43,8 @@ const MODE = {
 };
 
 export default function ButtonAppBar() {
+    const loggedInUser = useSelector(state => state.user.current);
+    const isLoggedIn = !!loggedInUser.id;
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [mode, setMode] = useState(MODE.LOGIN);
@@ -74,9 +77,16 @@ export default function ButtonAppBar() {
                     <NavLink className={classes.link} to={"/counter"}>
                         <Button color="inherit">Counter</Button>
                     </NavLink>
-                    <Button color="inherit" onClick={handleClickOpen}>
-                        {(mode === MODE.LOGIN) ? 'Login' : 'Register'}
-                    </Button>
+                    {isLoggedIn && (
+                        <IconButton color="inherit">
+                            <AccountCircle/>
+                        </IconButton>
+                    )}
+                    {!isLoggedIn && (
+                        <Button color="inherit" onClick={handleClickOpen}>
+                            Login
+                        </Button>
+                    )}
                 </Toolbar>
             </AppBar>
             <Dialog
