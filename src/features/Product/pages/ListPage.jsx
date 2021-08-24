@@ -5,6 +5,7 @@ import productApi from "../../../api/productApi";
 import ProductSkeletonList from "../components/ProductSkeletonList";
 import ProductList from "../components/ProductList";
 import {Pagination} from "@material-ui/lab";
+import ProductSort from "../components/ProductSort";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -34,7 +35,8 @@ function ListPage(props) {
     const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState({
         _page: 1,
-        _limit: 9
+        _limit: 9,
+        _sort: 'salePrice:ASC'
     });
 
     useEffect(() => {
@@ -58,6 +60,13 @@ function ListPage(props) {
         }));
     }
 
+    const handleSortChange = (newSortValue) => {
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            _sort: newSortValue
+        }));
+    }
+
     return (
         <Box>
             <Container>
@@ -69,6 +78,7 @@ function ListPage(props) {
                     </Grid>
                     <Grid item className={classes.right}>
                         <Paper elevation={0}>
+                            <ProductSort currentSort={filters._sort} onChange={handleSortChange}/>
                             {loading ? <ProductSkeletonList/> : <ProductList productList={productList}/>}
                             <Box className={classes.pagination}>
                                 <Pagination
