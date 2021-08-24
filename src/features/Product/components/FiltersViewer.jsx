@@ -68,13 +68,13 @@ const FILTER_LIST = [
     },
     {
         id: 4,
-        getLabel: (filters) => `Category - ${filters.category}`,
+        getLabel: (filters) => `Category - ${filters['category.id']}`,
         isVisible: (filters) => Object.keys(filters).includes('category.id'),
         isActive: () => true,
         isRemovable: true,
         onRemove: (filters) => {
             const newFilters = {...filters};
-            delete newFilters.category.id;
+            delete newFilters['category.id'];
             return newFilters;
         },
         onToggle: null
