@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     borderTop: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
+        paddingTop: theme.spacing(1),
         borderTop: `1px solid ${theme.palette.grey[300]}`
     }
 }));
@@ -51,10 +52,22 @@ function FiltersSkeletonList({length}) {
                 </ul>
             </Box>
             <Box className={classes.borderTop}>
+                <Skeleton variant="rect" width="72%"/>
                 <ul className={classes.menu}>
                     <li><Skeleton variant="rect" width="72%"/></li>
                     <li><Skeleton variant="rect" width="100%"/></li>
                     <li><Skeleton variant="rect" width="24%"/></li>
+                </ul>
+            </Box>
+            <Box className={classes.borderTop}>
+                <Skeleton variant="rect" width="72%"/>
+                <ul className={classes.menu}>
+                    <li>
+                        <Skeleton variant="rect" width="40%"/>
+                    </li>
+                    <li>
+                        <Skeleton variant="rect" width="40%"/>
+                    </li>
                 </ul>
             </Box>
         </Box>
