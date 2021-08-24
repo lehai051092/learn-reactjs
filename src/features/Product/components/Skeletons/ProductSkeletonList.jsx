@@ -8,7 +8,7 @@ ProductSkeletonList.propTypes = {
 };
 
 ProductSkeletonList.defaultProps = {
-    length: 9
+    length: 12
 };
 
 function ProductSkeletonList({length}) {

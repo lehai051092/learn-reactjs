@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {Box, Container, Grid, Paper} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import productApi from "../../../api/productApi";
-import ProductSkeletonList from "../components/ProductSkeletonList";
+import ProductSkeletonList from "../components/Skeletons/ProductSkeletonList";
 import ProductList from "../components/ProductList";
 import {Pagination} from "@material-ui/lab";
 import ProductSort from "../components/ProductSort";
 import ProductFilters from "../components/ProductFilters";
+import FiltersSkeletonList from "../components/Skeletons/FiltersSkeletonList";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -80,7 +81,11 @@ function ListPage(props) {
                 <Grid container spacing={1}>
                     <Grid item className={classes.left}>
                         <Paper elevation={0}>
-                            <ProductFilters filters={filters} onChange={handleFiltersChange}/>
+                            {
+                                loading
+                                    ? <FiltersSkeletonList/>
+                                    : <ProductFilters filters={filters} onChange={handleFiltersChange}/>
+                            }
                         </Paper>
                     </Grid>
                     <Grid item className={classes.right}>

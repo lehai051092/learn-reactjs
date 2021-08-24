@@ -1,13 +1,36 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {Box, List, ListItem, ListItemText, ListSubheader} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 import categoryApi from "../../../../api/categoryApi";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        padding: theme.spacing(2)
+    },
+    menu: {
+        padding: '0',
+        margin: '0',
+        listStyle: 'none',
+
+        '& > li': {
+            marginTop: theme.spacing(1),
+            transition: 'all .25s',
+
+            '&:hover': {
+                color: theme.palette.primary.dark,
+                cursor: 'pointer'
+            }
+        }
+    }
+}));
 
 FilterByCategory.propTypes = {
     onChange: PropTypes.func,
 };
 
 function FilterByCategory({onChange}) {
+    const classes = useStyles();
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -33,25 +56,24 @@ function FilterByCategory({onChange}) {
     }
 
     return (
-        <Box>
-            <List
-                component="nav"
-                aria-labelledby="nested-list-subheader"
-                subheader={
-                    <ListSubheader component="div" id="nested-list-subheader">
-                        Filter By Category
-                    </ListSubheader>
-                }
-            >
+        <Box className={classes.root}>
+            <Typography variant={"subtitle2"} className={classes.title}>
+                Filter By Category
+            </Typography>
+            <ul className={classes.menu}>
                 {
                     categories.map((category) => (
-                        <ListItem button key={category.id} onClick={() => handleCategoryClick(category)}>
-                            <ListItemText primary={category.name}/>
-                        </ListItem>
+                        <li
+                            key={category.id}
+                            onClick={() => handleCategoryClick(category)}
+                        >
+                            <Typography variant={"body2"}>
+                                {category.name}
+                            </Typography>
+                        </li>
                     ))
                 }
-
-            </List>
+            </ul>
         </Box>
     );
 }
