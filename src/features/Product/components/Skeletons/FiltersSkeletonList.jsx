@@ -37,7 +37,7 @@ function FiltersSkeletonList({length}) {
             <ul className={classes.menu}>
                 {
                     Array.from(new Array(length)).map((x, index) => (
-                        <li>
+                        <li key={index}>
                             <Skeleton variant="rect" width="36%"/>
                         </li>
                     ))
