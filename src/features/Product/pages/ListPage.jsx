@@ -53,6 +53,7 @@ function ListPage(props) {
         page: 1
     });
     const [loading, setLoading] = useState(true);
+    const [categoryName, setCategoryName] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -92,6 +93,11 @@ function ListPage(props) {
     }
 
     const handleFiltersChange = (newFilters) => {
+        if (newFilters['category.name']) {
+            setCategoryName(newFilters['category.name']);
+            delete newFilters['category.name'];
+        }
+
         const filters = {
             ...queryParams,
             ...newFilters
@@ -126,7 +132,7 @@ function ListPage(props) {
                     <Grid item className={classes.right}>
                         <Paper elevation={0}>
                             <ProductSort currentSort={queryParams._sort} onChange={handleSortChange}/>
-                            <FiltersViewer filters={queryParams} onChange={handleFiltersViewer}/>
+                            <FiltersViewer filters={queryParams} onChange={handleFiltersViewer} categoryName={categoryName}/>
                             {loading ? <ProductSkeletonList/> : <ProductList productList={productList}/>}
                             <Box className={classes.pagination}>
                                 <Pagination

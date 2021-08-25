@@ -20,6 +20,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+FiltersViewer.propTypes = {
+    filters: PropTypes.object,
+    onChange: PropTypes.func,
+    categoryName: PropTypes.string,
+};
+
 const FILTER_LIST = [
     {
         id: 1,
@@ -68,7 +74,7 @@ const FILTER_LIST = [
     },
     {
         id: 4,
-        getLabel: (filters) => `Category - ${filters['category.id']}`,
+        getLabel: (categoryName) => `Category - ${categoryName}`,
         isVisible: (filters) => Object.keys(filters).includes('category.id'),
         isActive: () => true,
         isRemovable: true,
@@ -81,12 +87,7 @@ const FILTER_LIST = [
     },
 ];
 
-FiltersViewer.propTypes = {
-    filters: PropTypes.object,
-    onChange: PropTypes.func,
-};
-
-function FiltersViewer({filters = {}, onChange = null}) {
+function FiltersViewer({filters = {}, onChange = null, categoryName = ''}) {
     const classes = useStyles();
     const visibleFilters = useMemo(() => {
         return FILTER_LIST.filter(filter => filter.isVisible(filters));
@@ -97,7 +98,7 @@ function FiltersViewer({filters = {}, onChange = null}) {
             {visibleFilters.map(filter => (
                 <li key={filter.id}>
                     <Chip
-                        label={filter.getLabel(filters)}
+                        label={(filter.id === 4) ? filter.getLabel(categoryName) : filter.getLabel(filters)}
                         color={filter.isActive(filters) ? 'primary' : 'default'}
                         clickable={!filter.isRemovable}
                         onClick={filter.isRemovable ? null : () => {
