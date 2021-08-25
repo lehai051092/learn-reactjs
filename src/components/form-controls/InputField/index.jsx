@@ -26,7 +26,7 @@ function InputField(props) {
                     fullWidth
                     label={label}
                     disabled={disabled}
-                    error={hasError}
+                    error={Boolean(hasError)}
                     helperText={errors[name]?.message}
                     onChange={onChange}
                     onBlur={onBlur}
