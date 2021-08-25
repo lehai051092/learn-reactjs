@@ -31,12 +31,12 @@ function QuantityField(props) {
 
     return (
         <FormControl error={hasError} variant="outlined" margin="normal" size="small">
-            <Typography>{label}</Typography>
             <Controller
                 name={name}
                 control={form.control}
                 render={({onChange, onBlur, value, name}) => (
                     <Box className={classes.qtyBox}>
+                        <Typography component="span">{label}</Typography>
                         <IconButton onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) - 1 : 1)}>
                             <RemoveCircleOutline/>
                         </IconButton>

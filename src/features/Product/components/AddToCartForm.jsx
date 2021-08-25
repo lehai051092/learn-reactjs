@@ -5,12 +5,20 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import QuantityField from "../../../components/form-controls/QuantityField";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        padding: theme.spacing(2)
+    }
+}));
 
 AddToCartForm.propTypes = {
     onSubmit: PropTypes.func,
 };
 
 function AddToCartForm({onSubmit = null}) {
+    const classes = useStyles();
     const schema = yup.object().shape({
         qty: yup.number().required('Please enter quantity!').min(1, 'Please enter smallest equal 1!').typeError('Please enter a number!')
     });
@@ -28,20 +36,22 @@ function AddToCartForm({onSubmit = null}) {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
-            <Box>
-                <QuantityField name="qty" label="Qty" form={form}/>
-            </Box>
-            <Box>
-                <Button type="submit"
-                        variant="contained"
-                        color="secondary"
-                        size={"medium"}
-                >
-                    Add To Cart
-                </Button>
-            </Box>
-        </form>
+        <Box className={classes.root}>
+            <form onSubmit={form.handleSubmit(handleSubmit)}>
+                <Box>
+                    <QuantityField name="qty" label="Qty" form={form}/>
+                </Box>
+                <Box>
+                    <Button type="submit"
+                            variant="contained"
+                            color="secondary"
+                            size={"medium"}
+                    >
+                        Add To Cart
+                    </Button>
+                </Box>
+            </form>
+        </Box>
     );
 }
 
