@@ -1,6 +1,10 @@
 import axiosClient from './axiosClient';
 
 const productApi = {
+    get(id) {
+        const url = `/products/${id}`;
+        return axiosClient.get(url);
+    },
     async getAll(params) {
         // Transform _page to _start
         const newParams = {...params};
@@ -27,7 +31,7 @@ const productApi = {
                 total: count
             }
         }
-    }
+    },
 };
 
 export default productApi;
