@@ -36,7 +36,7 @@ function AddToCartForm({onSubmit = null}) {
                 <Button type="submit"
                         variant="contained"
                         color="secondary"
-                        size={"small"}
+                        size={"medium"}
                 >
                     Add To Cart
                 </Button>
