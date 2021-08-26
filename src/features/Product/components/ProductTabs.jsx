@@ -29,11 +29,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-ProductMenu.propTypes = {
+ProductTabs.propTypes = {
 
 };
 
-function ProductMenu(props) {
+function ProductTabs(props) {
     const classes = useStyles();
     const {url} = useRouteMatch();
 
@@ -52,4 +52,4 @@ function ProductMenu(props) {
     );
 }
 
-export default ProductMenu;
+export default ProductTabs;

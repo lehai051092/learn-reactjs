@@ -10,7 +10,6 @@ export default function useProductDetail(productId) {
             try {
                 const productData = await productApi.get(productId);
                 setProduct(productData);
-                setLoading(true);
             } catch (error) {
                 console.log(error);
             }
