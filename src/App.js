@@ -7,6 +7,7 @@ import NotFound from './components/NotFound';
 import CounterFeature from "./features/Counter";
 import Header from './components/Header';
 import ProductFeature from "./features/Product";
+import CartFeature from "./features/Cart";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/color-box" component={ColorBox}/>
                 <Route path="/counter" component={Counter}/>
                 <Route path="/products" component={ProductFeature}/>
+                <Route path="/cart" component={CartFeature}/>
                 {/*Not Found*/}
                 <Route component={NotFound}/>
             </Switch>
