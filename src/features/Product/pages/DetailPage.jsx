@@ -10,6 +10,8 @@ import ProductTabs from "../components/ProductTabs";
 import ProductDescription from "../components/Tabs/ProductDescription";
 import ProductAdditional from "../components/Tabs/ProductAdditional";
 import ProductReviews from "../components/Tabs/ProductReviews";
+import {useDispatch} from "react-redux";
+import {addToCart} from "../../Cart/cartSlice";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -37,14 +39,19 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const handleAddToCartSubmit = (formValues) => {
-    console.log(formValues);
-}
-
 function DetailPage() {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const {params: {productId}, url} = useRouteMatch();
     const {product, loading} = useProductDetail(productId);
+
+    const handleAddToCartSubmit = ({quantity}) => {
+        dispatch(addToCart({
+            id: product.id,
+            product,
+            quantity
+        }));
+    }
 
     return (
         <Box className={classes.root}>

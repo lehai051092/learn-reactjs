@@ -20,11 +20,11 @@ AddToCartForm.propTypes = {
 function AddToCartForm({onSubmit = null}) {
     const classes = useStyles();
     const schema = yup.object().shape({
-        qty: yup.number().required('Please enter quantity!').min(1, 'Please enter smallest equal 1!').typeError('Please enter a number!')
+        quantity: yup.number().required('Please enter quantity!').min(1, 'Please enter smallest equal 1!').typeError('Please enter a number!')
     });
     const form = useForm({
         defaultValues: {
-            qty: 1,
+            quantity: 1,
         },
         resolver: yupResolver(schema)
     });
@@ -39,7 +39,7 @@ function AddToCartForm({onSubmit = null}) {
         <Box className={classes.root}>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
                 <Box>
-                    <QuantityField name="qty" label="Qty" form={form}/>
+                    <QuantityField name="quantity" label="Qty" form={form}/>
                 </Box>
                 <Box>
                     <Button type="submit"
