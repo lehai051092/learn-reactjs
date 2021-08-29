@@ -21,35 +21,42 @@ QuantityField.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
     disabled: PropTypes.bool,
+    onChangeRHF: PropTypes.func,
 };
 
-function QuantityField(props) {
+function QuantityField({form = {}, name = '', label = '', disabled = false, onChangeRHF = null}) {
     const classes = useStyles();
-    const {form, name, label, disabled} = props;
     const {errors, setValue} = form;
     const hasError = !!errors[name];
+
+    const handleChange = (value) => {
+        return onChangeRHF(value)
+    }
 
     return (
         <FormControl error={hasError} variant="outlined" margin="normal" size="small">
             <Controller
                 name={name}
+                onChangeRHF={onChangeRHF}
                 control={form.control}
-                render={({onChange, onBlur, value, name}) => (
+                render={({onBlur, value, name}) => (
                     <Box className={classes.qtyBox}>
                         <Typography component="span">{label}</Typography>
-                        <IconButton onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) - 1 : 1)}>
+                        <IconButton
+                            onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) - 1 : 1)}>
                             <RemoveCircleOutline/>
                         </IconButton>
                         <OutlinedInput
                             id={name}
                             type="number"
                             disabled={disabled}
-                            onChange={onChange}
+                            onChange={handleChange(value)}
                             onBlur={onBlur}
                             value={value}
                             name={name}
                         />
-                        <IconButton onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) + 1 : 1)}>
+                        <IconButton
+                            onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) + 1 : 1)}>
                             <AddCircleOutline/>
                         </IconButton>
                     </Box>

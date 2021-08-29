@@ -39,7 +39,7 @@ function AddToCartForm({onSubmit = null}) {
         <Box className={classes.root}>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
                 <Box>
-                    <QuantityField name="quantity" label="Qty" form={form}/>
+                    <QuantityField name="quantity" label="Qty" form={form} onChangeRHF={() => null}/>
                 </Box>
                 <Box>
                     <Button type="submit"

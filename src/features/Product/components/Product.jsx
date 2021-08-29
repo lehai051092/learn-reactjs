@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Box, Typography} from "@material-ui/core";
 import {STATIC_HOST, THUMBNAIL_PLACEHOLDER} from "../../../constants/index";
 import {useHistory} from "react-router-dom";
-import formatPrice from "../../../units/comon";
+import {formatPrice} from "../../../units";
 
 Product.propTypes = {
     product: PropTypes.object,

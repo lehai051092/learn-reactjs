@@ -1,6 +1,12 @@
 import {createSelector} from "@reduxjs/toolkit";
 
-const cartItemsSelector = (state) => state.cart.cartItems;
+export const cartItemsSelector = (state) => state.cart.cartItems;
+
+// // Get all cart items
+// export const getAllItemsVisible = createSelector(
+//     cartItemsSelector,
+//     (cartItems) => cartItems.map((item) => item, 0)
+// );
 
 // Count number of products in cart
 export const cartItemsCountSelector = createSelector(
@@ -11,5 +17,6 @@ export const cartItemsCountSelector = createSelector(
 // Calculate total price of cart
 export const cartTotalSelector = createSelector(
     cartItemsSelector,
-    (cartItems) => cartItems.reduce((total, item) => total + (item.salePrice * item.quantity), 0)
+    (cartItems) => cartItems.reduce((total, item) => total + (item.product.salePrice * item.quantity), 0)
 );
+

@@ -5,15 +5,16 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CodeIcon from '@material-ui/icons/Code';
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useHistory} from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import {Box, IconButton, Menu, MenuItem} from "@material-ui/core";
-import {AccountCircle, Close} from "@material-ui/icons";
+import {Badge, Box, IconButton, Menu, MenuItem} from "@material-ui/core";
+import {AccountCircle, AddShoppingCartOutlined, Close} from "@material-ui/icons";
 import Login from "../../features/Auth/components/Login";
 import Register from "../../features/Auth/components/Register";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../features/Auth/userSlice";
+import {cartItemsCountSelector} from "../../features/Cart/selectors";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,6 +46,8 @@ const MODE = {
 
 export default function ButtonAppBar() {
     const dispatch = useDispatch();
+    const cartCount = useSelector(cartItemsCountSelector);
+    const history = useHistory();
     const loggedInUser = useSelector(state => state.user.current);
     const isLoggedIn = !!loggedInUser.id;
     const classes = useStyles();
@@ -81,6 +84,10 @@ export default function ButtonAppBar() {
         handleUserClickClose();
     }
 
+    const handleMiniCartClick = () => {
+        history.push('/cart');
+    }
+
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -114,6 +121,11 @@ export default function ButtonAppBar() {
                             Login
                         </Button>
                     )}
+                    <IconButton color="inherit" onClick={handleMiniCartClick}>
+                        <Badge badgeContent={cartCount} color="secondary">
+                            <AddShoppingCartOutlined/>
+                        </Badge>
+                    </IconButton>
                 </Toolbar>
             </AppBar>
             <Menu
